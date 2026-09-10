@@ -6,11 +6,24 @@
       "persistent": true
     },
     "build": {
+      "dependsOn": ["^db:generate"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {},
-    "seed": {
+    "db:generate": {
       "cache": false
+    },
+    "db:migrate": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": true
+    },
+    "seed": {
+      "cache": false,
+      "dependsOn": ["db:generate"]
     }
   }
 }

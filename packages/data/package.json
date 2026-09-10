@@ -2,7 +2,24 @@
   "name": "@rec/data",
   "private": true,
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "scripts": {
-    "seed": "node seed.mjs"
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio --port 5555",
+    "seed": "tsx seed.ts",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "better-sqlite3": "^12.4.1",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "prisma": "7.10.0",
+    "tsx": "^4.20.5"
   }
 }

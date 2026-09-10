@@ -12,6 +12,7 @@ Parks & recreation registration system. City staff manage programs in **admin**;
 
 ```bash
 pnpm install
+pnpm db:migrate
 pnpm seed
 pnpm dev
 ```
@@ -24,15 +25,20 @@ pnpm dev
 ## Commands
 
 ```bash
-pnpm dev    # both Next.js apps via Turborepo
-pnpm seed   # create the local SQLite database
-pnpm build  # production builds
+pnpm dev         # both Next.js apps via Turborepo
+pnpm db:migrate  # create / apply Prisma migrations
+pnpm db:generate # regenerate Prisma Client
+pnpm db:studio   # inspect SQLite in Prisma Studio
+pnpm seed        # reset and populate local data
+pnpm build       # production builds
 ```
+
+Both apps import a shared Prisma client from `@rec/data`. The SQLite file is `packages/data/rec.db`.
 
 ## Structure
 
 ```text
-apps/admin      City staff: classes, sections, release times
-apps/web        Consumers: browse programs and register
-packages/data   SQLite database and seed
+apps/admin          City staff: classes, sections, release times
+apps/web            Consumers: browse programs and register
+packages/data       Prisma schema, migrations, seed, and SQLite file
 ```

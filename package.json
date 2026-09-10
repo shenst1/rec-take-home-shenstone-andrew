@@ -6,7 +6,10 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "seed": "turbo run seed --filter=@rec/data"
+    "seed": "turbo run seed --filter=@rec/data",
+    "db:generate": "turbo run db:generate --filter=@rec/data",
+    "db:migrate": "turbo run db:migrate --filter=@rec/data",
+    "db:studio": "turbo run db:studio --filter=@rec/data"
   },
   "devDependencies": {
     "turbo": "^2.10.12",
@@ -14,7 +17,10 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@prisma/engines",
+      "better-sqlite3",
       "esbuild",
+      "prisma",
       "sharp",
       "unrs-resolver"
     ]

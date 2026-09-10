@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Program {
+  id                  Int       @id @default(autoincrement())
+  name                String
+  description         String?
+  registrationOpensAt DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  sections            Section[]
+
+  @@index([name])
+}
+
+model Section {
+  id            Int            @id @default(autoincrement())
+  programId     Int
+  program       Program        @relation(fields: [programId], references: [id])
+  name          String
+  capacity      Int
+  minAge        Int?
+  maxAge        Int?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  registrations Registration[]
+  waitlist      WaitlistEntry[]
+
+  @@index([programId])
+}
+
+model Household {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  children  Child[]
+}
+
+model Child {
+  id            Int            @id @default(autoincrement())
+  householdId   Int
+  household     Household      @relation(fields: [householdId], references: [id])
+  firstName     String
+  lastName      String
+  dateOfBirth   DateTime
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  registrations Registration[]
+  waitlist      WaitlistEntry[]
+
+  @@index([householdId])
+}
+
+model Registration {
+  id        Int      @id @default(autoincrement())
+  sectionId Int
+  childId   Int
+  section   Section  @relation(fields: [sectionId], references: [id])
+  child     Child    @relation(fields: [childId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([sectionId, childId])
+  @@index([sectionId])
+  @@index([childId])
+}
+
+model WaitlistEntry {
+  id        Int      @id @default(autoincrement())
+  sectionId Int
+  childId   Int
+  section   Section  @relation(fields: [sectionId], references: [id])
+  child     Child    @relation(fields: [childId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([sectionId, childId])
+  @@index([sectionId])
+  @@index([childId])
+}
