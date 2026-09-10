@@ -8,7 +8,8 @@ export class RegistrationError extends Error {
       | "SECTION_NOT_FOUND"
       | "NOT_OPEN"
       | "AGE_RESTRICTED"
-      | "ALREADY_ENROLLED",
+      | "ALREADY_ENROLLED"
+      | "NOT_ENROLLED",
     message: string,
   ) {
     super(message);

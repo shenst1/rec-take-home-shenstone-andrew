@@ -1,5 +1,7 @@
 export { prisma } from "./client";
 export { Prisma, PrismaClient } from "../generated/client";
+export { dropFromSection } from "./drop-from-section";
+export type { DropFromSectionResult } from "./drop-from-section";
 export {
   RegistrationError,
   ageInYears,
