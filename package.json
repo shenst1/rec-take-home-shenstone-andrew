@@ -6,6 +6,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
+    "test": "turbo run test",
     "seed": "turbo run seed --filter=@rec/data",
     "db:generate": "turbo run db:generate --filter=@rec/data",
     "db:migrate": "turbo run db:migrate --filter=@rec/data",

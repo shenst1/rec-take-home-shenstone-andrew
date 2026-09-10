@@ -30,6 +30,7 @@ pnpm db:migrate  # create / apply Prisma migrations
 pnpm db:generate # regenerate Prisma Client
 pnpm db:studio   # inspect SQLite in Prisma Studio
 pnpm seed        # reset and populate local data
+pnpm test        # data-layer tests against an isolated SQLite file
 pnpm build       # production builds
 ```
 

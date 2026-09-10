@@ -2,6 +2,7 @@ node_modules/
 .next/
 out/
 .turbo
+.tmp/
 generated/
 *.db
 *.db-shm
