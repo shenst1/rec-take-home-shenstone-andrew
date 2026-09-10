@@ -4,15 +4,16 @@ Parks & recreation registration system. City staff manage programs in **admin**;
 
 ## Requirements
 
-- [Bun](https://bun.sh/) 1.3.13
-- No external database. SQLite lives in `data/`.
+- Node.js 22+
+- [pnpm](https://pnpm.io/) 10
+- No external database. SQLite lives in `packages/data`.
 
 ## Start locally
 
 ```bash
-bun install
-bun run seed
-bun run dev
+pnpm install
+pnpm seed
+pnpm dev
 ```
 
 | App | Audience | URL |
@@ -23,15 +24,15 @@ bun run dev
 ## Commands
 
 ```bash
-bun run dev    # both Next.js apps
-bun run seed   # create / reset the local SQLite database
-bun run build  # production builds
+pnpm dev    # both Next.js apps via Turborepo
+pnpm seed   # create the local SQLite database
+pnpm build  # production builds
 ```
 
 ## Structure
 
 ```text
-admin/   City staff: classes, sections, release times
-web/     Consumers: browse programs and register
-data/    SQLite database and seed
+apps/admin      City staff: classes, sections, release times
+apps/web        Consumers: browse programs and register
+packages/data   SQLite database and seed
 ```

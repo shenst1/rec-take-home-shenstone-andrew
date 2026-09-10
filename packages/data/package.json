@@ -3,6 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "seed": "bun seed.ts"
+    "seed": "node seed.mjs"
   }
 }
