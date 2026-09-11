@@ -10,6 +10,56 @@ I treated this as a data-modeling exercise, not a full product. The interesting 
 
 **Prisma + SQLite.** I chose Prisma because typed ORM definitions are the point of this exercise. SQLite keeps the assignment local; no Postgres to stand up.
 
+```mermaid
+erDiagram
+    Program ||--|{ Section : has
+    Household ||--|{ Child : has
+    Section ||--o{ Registration : seats
+    Child ||--o{ Registration : sits
+    Section ||--o{ WaitlistEntry : queues
+    Child ||--o{ WaitlistEntry : waits
+
+    Program {
+        int id PK
+        string name
+        string description
+        datetime registrationOpensAt
+    }
+    Section {
+        int id PK
+        int programId FK
+        string name
+        int capacity
+        int minAge
+        int maxAge
+    }
+    Household {
+        int id PK
+        string email UK
+        string name
+    }
+    Child {
+        int id PK
+        int householdId FK
+        string firstName
+        string lastName
+        datetime dateOfBirth
+    }
+    Registration {
+        int id PK
+        int sectionId FK
+        int childId FK
+        datetime createdAt
+    }
+    WaitlistEntry {
+        int id PK
+        int sectionId FK
+        int childId FK
+        datetime createdAt
+    }
+```
+
+
 **Isolated tests.** Before domain logic, I set up a basic test harness: each Vitest run gets its own SQLite file, migrations apply, then the file is torn down. Domain tests reset tables between cases.
 
 **Domain actions, not events.** The two actions parents actually take are register and drop. Those are the ones I built tests around:
